@@ -1,0 +1,13 @@
+<web-app>
+	<servlet>
+        <servlet-name>GrabaSolicitudPedido</servlet-name>
+        <servlet-class>cl.laPalmera.graba.GrabaSolicitudPedido</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GrabaSolicitudPedido</servlet-name>
+        <url-pattern>/servlet/GrabaSolicitudPedido</url-pattern>
+    </servlet-mapping>
+    
+	
+
+</web-app>
