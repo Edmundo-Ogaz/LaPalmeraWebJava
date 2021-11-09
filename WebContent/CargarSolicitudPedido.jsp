@@ -13,13 +13,13 @@ if (!cantidadproducto.equals("0"))
   DetallePedido puntero = new DetallePedido();
   puntero.setCodigoProducto(producto);
   puntero.setCantidadProducto(cantidadproducto);	
-  /*Producto producto1 = new Producto();
+  Producto producto1 = new Producto();
   producto1.setCodigoProducto(producto);
   if (producto1.buscar())
   {
 	String precioproducto = String.valueOf(Integer.parseInt(producto1.getValorVentaProducto())*Integer.parseInt(cantidadproducto));
 	puntero.setPrecioProducto(precioproducto);
-  }*/
+  }
     arraySolicitudProducto.add(puntero);
 }		
 %>
@@ -34,12 +34,15 @@ if (!cantidadproducto.equals("0"))
 		<th>
 		Cantidad
 		</th>
+		<th>
+		Precio
+		</th>
 	</tr>
 	<%
 	int i = 1;
 	int k = 0;
 	int j = 1;
-	int preciototal = 0;
+	int total = 0;
 	String cantidadinsumo = "";
 	String stock= "S";
 	Iterator itSolicitudProducto= arraySolicitudProducto.iterator();
@@ -67,16 +70,25 @@ if (!cantidadproducto.equals("0"))
 			<%=detallePedido.getCantidadProducto()%>
 			<input type="hidden" name=cantidadproducto<%=i%> value="<%=detallePedido.getCantidadProducto()%>"/>
 		</td>
-			<!--td>
-			<%--=detallePedido.getPrecioProducto()--%>  
-			<%--preciototal = preciototal + Integer.parseInt(detallePedido.getPrecioProducto());--%> 
-			<input type="hidden" name=precioproducto<%--=i--%> value="<%--=detallePedido.getPrecioProducto()--%>"/>
-			</td-->
-			<input type="hidden" name=ultimafila<%=i%> value="<%=j-1%>"/>
+		<td>
+			<%=detallePedido.getPrecioProducto()%>
+			<input type="hidden" name=precioproducto<%=i%> value="<%=detallePedido.getPrecioProducto()%>"/>
+			<%total = total + Integer.parseInt(detallePedido.getPrecioProducto());%>
+		</td>
+		<input type="hidden" name=ultimafila<%=i%> value="<%=j-1%>"/>
 	</tr>
 	<%i++;%>
 	<%k++;%>
 	<%}%>
+	<tr>
+		<td colspan="3">
+			Total
+		</td>
+		<td>
+			<%=total%>
+			<input type="hidden" name=total value="<%=total%>"/>
+		</td>
+	</tr>
 	</table>
 	
 	<table>
@@ -101,6 +113,9 @@ if (!cantidadproducto.equals("0"))
 					   <td>
 					   		<input type="text" name="cantidadproducto" size="3"/>
 					   </td>
+					   <td>
+					   		<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
+					   </td>
 				   </tr>
 				   
 </table>
@@ -110,6 +125,3 @@ if (!cantidadproducto.equals("0"))
 <input type="hidden" name="ingrediente" value="<%=j%>"/>
 <input type="hidden" name="ultimafilaproducto" value="<%=i%>"/>
 <input type="hidden" name="cantidadsolicitudproducto" value="<%=k%>"/>
-<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
-<!--button type="button" onClick="recuperaOtraSolicitudProducto()">Agregar Otro Producto</button-->
-<!--button type="button" onClick="sacaSolicitudProductoUltimo()">Sacar Ultimo Producto</button-->

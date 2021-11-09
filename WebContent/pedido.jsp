@@ -7,6 +7,17 @@
 <TITLE>AnimeCoversFan</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
 <link rel="alternate" type="application/rss+xml" title="RSS News" href="www.animecoversfan.com/fluxrss.xml.htm" />
+
+<!-Hoja de estilos del calendario -->
+<link rel="stylesheet" type="text/css" media="all" href="calendar-system.css" title="win2k-cold-1" />
+<!-- librería principal del calendario -->
+<script type="text/javascript" src="calendar.js"></script>
+<!-- librería para cargar el lenguaje deseado -->
+<script type="text/javascript" src="lang/calendar-es.js"></script>
+<!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
+<script type="text/javascript" src="calendar-setup.js"></script>
+<!-- script que define y configura el calendario-->
+
 <script>
 	  
 	  function seleccionar_todo(){
@@ -90,70 +101,6 @@
 		return (true);
 		}
 	
-	function recuperaOtraSolicitudProducto() {
-		
-		  /*if (document.formulario.ingrediente.value == 1) {
-		    alert("No tiene Ingredientes asociados el Producto.");
-		    //document.formulario.ingrediente.focus();
-		    return (false);
-		  }
-		  
-		  if (document.formulario.stock.value == "N") {
-		    alert("Hay productos que no tienen stock sufuciente.");
-		    //document.formulario.ingrediente.focus();
-		    return (false);
-		  }*/
-		  
-		  /*if (document.formulario.producto.value == -1) {
-		    alert("Ingrese el Producto.");
-		    document.formulario.producto.focus();
-		    return (false);
-		  }
-		  if (document.formulario.cantidadproducto.value.length < 1) {
-		    alert("Escriba la Cantidad del Producto.");
-		    document.formulario.cantidadproducto.focus();
-		    return (false);
-		  }
-		 
-		  var checkOK = "0123456789";
-		  var checkStr = document.formulario.cantidadproducto.value;
-		  var allValid = true;
-		  var decPoints = 0;
-		  var allNum = "";
-		  for (i = 0; i < checkStr.length; i++) {
-		    ch = checkStr.charAt(i);
-		    for (j = 0; j < checkOK.length; j++)
-		      if (ch == checkOK.charAt(j))
-		        break;
-		    if (j == checkOK.length) {
-		      allValid = false;
-		      break;
-		    }
-		    allNum += ch;
-		  }
-		  if (!allValid) {
-		    alert("Escriba sólo números en el campo \"Cantidad\".");
-		    document.formulario.cantidadproducto.focus();
-		    return (false);
-		  } */  
-		  
-			// Creamos el control XMLHttpRequest segun el navegador en el que estemos 
-			if( window.XMLHttpRequest )
-				ajax = new XMLHttpRequest(); // No Internet Explorer
-			else
-				ajax = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer
-			// Almacenamos en el control al funcion que se invocara cuando la peticion
-			// cambie de estado	
-			ajax.onreadystatechange = funcionCallback;
-				// Enviamos la peticion
-			var valor1 = document.formulario.producto.value;
-			var valor2 = document.formulario.cantidadproducto.value;
-			ajax.open( "GET", "/pruebaWeb/CargarSolicitudProducto.jsp?producto="+valor1+"&cantidadproducto="+valor2, true );
-			ajax.send( "" );
-		
-		return (true);
-		}
-	
 function sacaSolicitudProducto() {
 	    
 		var aux = 0;    
@@ -229,6 +176,106 @@ function sacaSolicitudProducto() {
 	return (true)
 	}
 	</script>
+	
+	<script>
+	
+	function ValidaEntrada() {
+	  
+	  /*if (document.formulario.producto.value == -1) {
+	    alert("Ingrese el Producto.");
+	    document.formulario.producto.focus();
+		return (false);
+	  }
+	  
+	  if (document.formulario.cantidadproducto.value.length < 1) {
+	    alert("Ingrese la cantidad del Producto.");
+	    document.formulario.cantidadproducto.focus();
+		return (false);
+	  }*/
+	  
+		if (document.formulario.nombreConfirmacion.value == "") {
+		    alert("Escriba nombre del cliente para la confirmación.");
+		    document.formulario.nombreConfirmacion.focus();
+			return (false);
+		}
+	  
+	  	if (document.formulario.apellidoConfirmacion.value == "") {
+		    alert("Escriba apellido del cliente para la confirmación.");
+		    document.formulario.apellidoConfirmacion.focus();
+			return (false);
+		}
+	  	
+	  	if (document.formulario.telefonoConfirmacion.value == "") {
+		    alert("Escriba teléfono del cliente para la confirmación.");
+		    document.formulario.telefonoConfirmacion.focus();
+			return (false);
+		}
+	  
+	  if (document.formulario.ultimafilaproducto.value == 1) {
+	    alert("No tiene productos Asociados.");
+	    document.formulario.ultimafilaproducto.focus();
+		return (false);
+	  }
+	  
+	  if (document.formulario.nombreDespacho.value == "") {
+		    alert("Escriba nombre del cliente para el despacho.");
+		    document.formulario.nombreDespacho.focus();
+			return (false);
+		}
+	  
+	  if (document.formulario.apellidoDespacho.value == "") {
+		    alert("Escriba nombre del cliente para el despacho.");
+		    document.formulario.apellidoDespacho.focus();
+			return (false);
+		}
+	  
+	  if (document.formulario.direccionDespacho.value == "") {
+		    alert("Escriba dirección para el despacho.");
+		    document.formulario.direccionDespacho.focus();
+			return (false);
+		}
+	  
+	  if (document.formulario.fechaDespacho.value.length < 1) {
+	    alert("Escriba la fecha de Entrega.");
+	    document.formulario.fechaentrega.focus();
+	    return (false);
+	  }
+	  
+	  var hoy=new Date();
+	  var anohoy=hoy.getYear()+1900; 
+	  var meshoy=hoy.getMonth()+1;
+	  var diahoy=hoy.getDate();
+	  var fechahoy=anohoy+""+meshoy+""+diahoy;
+	  var varano=formulario.fechaDespacho.value.substr(0, 4); 
+	  var varmes=formulario.fechaDespacho.value.substr(5, 2);  
+	  if(varmes<10) {
+	    var varmes= formulario.fechaDespacho.value.substr(6, 1); 
+	  } 
+	  var vardia=formulario.fechaDespacho.value.substr(8, 2);
+	  if(vardia<10) {
+	    var vardia= formulario.fechaDespacho.value.substr(9, 1); 
+	  } 
+	  var varfecha=varano+varmes+vardia;
+	  
+	  if (parseInt(varfecha) <= parseInt(fechahoy)) {
+	    //alert(varfecha+" <= "+fechahoy);
+		alert("Fecha de Entrega no Permitida..");
+	    formulario.fechaDespacho.focus();
+	    return (false);
+	  }
+	    
+	  if (document.formulario.horaDespacho.value.length < 1) {
+	    alert("Escriba la Hora de Entrega.");
+	    document.formulario.horaDespacho.focus();
+	    return (false);
+	  }
+	    var entrar = confirm("¿Desea Continuar?")
+		if ( !entrar )
+	      return (false);
+		else
+		  return (true);
+	}
+	</script>
 </HEAD>
 <BODY>
 <DIV id=conteneur>
@@ -284,7 +331,7 @@ function sacaSolicitudProducto() {
     </UL>
     <UL class=piedmodule></UL>
   </DIV>
-  <form name="formulario" action="/pruebaWeb/servlet/GrabaSolicitudProducto" onSubmit="return ValidaEntrada()">
+  <form name="formulario" action="/pruebaWeb/servlet/GrabaSolicitudPedido" onSubmit="return ValidaEntrada()">
   <DIV id=centre>
      <UL class=titre-centre>Formulario de Pedido</UL>
 	 <UL class=menucentre>
@@ -299,22 +346,19 @@ function sacaSolicitudProducto() {
 	     <UL class=centeredimage>
 		  <table>
 		  <tr>
-		  <td>Nombre: *1 </td><td> <input name="nombre" type="text" size="40"></td>
+		  <td>Nombre: *1 </td><td> <input name="nombreConfirmacion" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Apellido: *1 </td><td> <input name="apellido" type="text" size="40"></td>
+		  <td>Apellido: *1 </td><td> <input name="apellidoConfirmacion" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Dirección: </td><td> <input name="direccion" type="text" size="40"></td>
+		  <td>Dirección: </td><td> <input name="direccionConfirmacion" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Comuna:*1 </td><td> <input name="comuna" type="text" size="40"></td>
+		  <td>telefono:*1*2 </td><td> <input name="telefonoConfirmacion" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>telefono:*1*2 </td><td> <input name="telefono" type="text" size="40"></td>
-		  </tr>
-		  <tr>
-		  <td>E-mail: </td><td> <input name="email" type="text" size="40"></td>
+		  <td>E-mail: </td><td> <input name="emailConfirmacion" type="text" size="40"></td>
 		  </tr>
 		  <tr>
 		  <td colspan="2">*1 Datos Obligatorios</td>
@@ -340,13 +384,15 @@ function sacaSolicitudProducto() {
 			   		<tr>
 					   <th>Selec</th>
 					   <th>Producto</th>
-					   <th>cantidad</th>
+					   <th>Cantidad</th>
+					   <th>Precio</th>
 			   		</tr>
 			   		<%
 					Iterator itSolicitudProducto= arraySolicitudProducto.iterator();
 					int i = 1;
 					int k = 0;
 					int j = 1;
+					int total = 0;
 					String cantidadinsumo = "";
 					String stock = "S";
 					while (itSolicitudProducto.hasNext())
@@ -373,17 +419,25 @@ function sacaSolicitudProducto() {
 							<%=detallePedido.getCantidadProducto()%>
 							<input type="hidden" name=cantidadproducto<%=i%> value="<%=detallePedido.getCantidadProducto()%>"/>
 						</td>
-								<!--td>
-								<%--=detallePedido.getPrecioProducto()--%>
-								<input type="hidden" name=precioproducto<%--=i--%> value="<%--=detallePedido.getPrecioProducto()--%>"/>
-								</td-->
 						<td>
-							<input type="hidden" name=ultimafila<%=i%> value="<%=j-1%>"/>
+							<%=detallePedido.getPrecioProducto()%>
+							<input type="hidden" name=precioproducto<%=i%> value="<%=detallePedido.getPrecioProducto()%>"/>
+							<%total = total + Integer.parseInt(detallePedido.getPrecioProducto());%>
 						</td>
+						<input type="hidden" name=ultimafila<%=i%> value="<%=j-1%>"/>
 					</tr>
 						<%i++;%>
 						<%k++;%>
 					<%}%>
+					<tr>
+						<td colspan="3">
+							Total
+						</td>
+						<td>
+							<%=total%>
+							<input type="hidden" name=total value="<%=total%>"/>
+						</td>
+					</tr>
 				</table>
 				<table>
 			   		<tr>
@@ -407,6 +461,9 @@ function sacaSolicitudProducto() {
 					   <td>
 					   		<input type="text" name="cantidadproducto" size="3"/>
 					   </td>
+					   <td>
+					   		<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
+					   </td>
 				   </tr>
 			   </table>
 			   
@@ -417,8 +474,6 @@ function sacaSolicitudProducto() {
 				<input type="hidden" name="ingrediente" value="<%=j%>"/>
 				<input type="hidden" name="ultimafilaproducto" value="<%=i%>"/>
 				<input type="hidden" name="cantidadsolicitudproducto" value="<%=k%>"/>
-				<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
-				<!--button type="button" onClick="sacaSolicitudProductoUltimo()">Sacar Ultimo Producto</button-->
 			</span>
 	    </UL>
     </UL>
@@ -430,64 +485,67 @@ function sacaSolicitudProducto() {
 		  <table>
 		  <tr>
 		  <td>A Nombre de : *1 </td>
-		  <td> <input name="nobre" type="text" size="40"></td>
+		  <td> <input name="nombreDespacho" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Apellido: *1 </td><td> <input name="apellido" type="text" size="40"></td>
+		  <td>Apellido: *1 </td><td> <input name="apellidoDespacho" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Dirección: </td><td> <input name="direccion" type="text" size="40"></td>
+		  <td>Dirección: </td><td> <input name="direccionDespacho" type="text" size="40"></td>
 		  </tr>
 		  <tr>
-		  <td>Comuna:*1 </td><td> <input name="comuna" type="text" size="40"></td>
-		  </tr>
-		  <tr>
-		  <td>telefono:*1 </td><td> <input name="telefono" type="text" size="40"></td>
-		  </tr>
-		  <tr>
-		  <td>E-mail: </td><td> <input name="email" type="text" size="40"></td>
-		  </tr>
-		  <tr>
+				<td>
+					Fecha de Entrega:*1
+				</td>
+				<td>
+					<input type="text" name="fechaDespacho" id="campo_fecha"/>
+					<input type="button" id="lanzador" value="..."/>
+					<!-- script que define y configura el calendario-->
+					<script type="text/javascript">
+					Calendar.setup({
+					inputField     :    "campo_fecha",     // id del campo de texto
+					ifFormat     :     "%Y-%m-%d",     // formato de la fecha que se escriba en el campo de texto
+					button     :    "lanzador"     // el id del botón que lanzará el calendario
+					});
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Hora de Entrega:*1
+				</td>
+				<td>
+					<select name="horaDespacho">
+					<option></option>
+					<option>10:00-12:00</option>
+					<option>12:00-14:00</option>
+					<option>14:00-16:00</option>
+					<option>16:00-18:00</option>
+					<option>18:00-20:00</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 		  <td colspan="2">*1 Datos Obligatorios</td>
 		  </tr>
-		  <tr>
-		  <td colspan="2">Fecha de Entrega:Día<select name="dia">
-		   <option>
-		   <option>1
-		   <option>2
-		   <option>3
-		   </select>
-		   Mes<select name="dia">
-		   <option>
-		   <option>1
-		   <option>2
-		   <option>3
-		   </select></td>
-		   </tr>
 		   </table>
 		  </UL>
     	</UL>
       	<UL class=piedcentre></UL>
-    
-		<UL class=titre-centre>Datos para la Confirmar</UL>
-   	  	<UL class=menucentre>
+      	
+      	<UL class=titre-centre>Comentario</UL>
+      	<UL class=menucentre>
 	      <UL class=centeredimage>
-		  <table>
-		  <tr>
-		  <td>telefono:*1*2 </td><td> <input name="telefono" type="text" size="20"></td>
-		  </tr>
-		  <tr>
-		   <td colspan="2">Hora para la confirmación del Pedido:<select name="hora confirmacion">
-		   <option>
-		   <option>10:00-11:00
-		   <option>12:00-13:00
-		   <option>14:00-15:00
-		   </select></td>
-		   </tr> 
-		   </table>
-		   </UL>
+			<table>
+			<tr>
+			<td>
+			<textarea name="comentario" rows="5" cols="55" ></textarea>
+			</td>
+			</tr>
+			</table>
+		</UL>
     	</UL>
-   		<UL class=piedcentre></UL>
+      	<UL class=piedcentre></UL>
    
 	   <p><input name="enviar" value="Enviar" type="submit">
 		  <input name="cancelar" value="cancelar" type="reset"></p>

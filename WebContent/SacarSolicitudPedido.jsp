@@ -47,11 +47,15 @@ Producto
 <th>
 Cantidad
 </th>
+<th>
+Precio
+</th>
 </tr>
 <%
 int i = 1;
 int k = 0;
 int j = 1;
+int total = 0;
 int preciototal = 0;
 String cantidadinsumo = "";
 String stock= "S";
@@ -80,12 +84,24 @@ out.print(producto2.getNombreProducto());
 <input type="hidden" name=cantidadproducto<%=i%> value="<%=detallePedido.getCantidadProducto()%>"/>
 </td>
 <td>
+			<%=detallePedido.getPrecioProducto()%>
+			<input type="hidden" name=precioproducto<%=i%> value="<%=detallePedido.getPrecioProducto()%>"/>
+			<%total = total + Integer.parseInt(detallePedido.getPrecioProducto());%>
+		</td>
 <input type="hidden" name=ultimafila<%=i%> value="<%=j-1%>"/>
-</td>
 </tr>
 <%i++;%>
 <%k++;%>
 <%}%>
+	<tr>
+		<td colspan="3">
+			Total
+		</td>
+		<td>
+			<%=total%>
+			<input type="hidden" name=total value="<%=total%>"/>
+		</td>
+	</tr>
 </table>
 
 <table>
@@ -112,11 +128,8 @@ out.print(producto2.getNombreProducto());
 			<%k++;%>
 		</td>
 		<td>
-			&nbsp;
-		</td>
-		<td>
-			&nbsp;
-		</td>
+	   		<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
+	   </td>
 	</tr>
 </table>
 
@@ -124,6 +137,3 @@ out.print(producto2.getNombreProducto());
 <input type="hidden" name="ingrediente" value="0"/>
 <input type="hidden" name="ultimafilaproducto" value="<%=i%>"/>
 <input type="hidden" name="cantidadsolicitudproducto" value="<%=k%>"/>
-<button type="button" onClick="recuperaSolicitudProducto()">Agregar Producto</button>
-<!--button type="button" onClick="recuperaOtraSolicitudProducto()">Agregar Otro Producto</button>
-<button type="button" onClick="sacaSolicitudProductoUltimo()">Sacar Ultimo Producto</button-->

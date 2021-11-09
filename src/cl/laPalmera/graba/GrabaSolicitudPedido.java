@@ -39,13 +39,13 @@ public class GrabaSolicitudPedido extends HttpServlet
 	          ConfirmacionPedido confirmacionPedido = new ConfirmacionPedido();
 	                 	      
 	          //CabezaPedido cabezaPedido = new CabezaPedido();
-			  cabezaPedido.setNombreCliente(httpservletrequest.getParameter("nombre") + " " + httpservletrequest.getParameter("apellido"));
+			  cabezaPedido.setNombreCliente(httpservletrequest.getParameter("nombreConfirmacion") + " " + httpservletrequest.getParameter("apellidoConfirmacion"));
 			  cabezaPedido.setFechaPedido(new java.text.SimpleDateFormat("yyy-MM-dd").format(new java.util.Date()));
 			  cabezaPedido.setHoraPedido(new java.text.SimpleDateFormat("hh:mm:ss").format(new java.util.Date()));
-			  cabezaPedido.setPrecioTotalPedido("0");
+			  cabezaPedido.setPrecioTotalPedido(httpservletrequest.getParameter("total"));
 			  cabezaPedido.setConfirmacionPedido("I");
 			  cabezaPedido.setDedicatoriaPedido("");
-			  cabezaPedido.setObservacionPedido("");
+			  cabezaPedido.setObservacionPedido(httpservletrequest.getParameter("comentario"));
 			  //cabezaPedido.grabar();
 			  query = cabezaPedido.grabar();
 			  if (query == 0){
@@ -60,7 +60,7 @@ public class GrabaSolicitudPedido extends HttpServlet
 				  //DetallePedido detallePedido = new DetallePedido();
 				  detallePedido.setNumeroPedido(numeropedido);
 				  detallePedido.setCodigoProducto(httpservletrequest.getParameter("producto" + j));
-				  detallePedido.setPrecioProducto("0");
+				  detallePedido.setPrecioProducto(httpservletrequest.getParameter("precioproducto" + j));
 				  detallePedido.setCantidadProducto(httpservletrequest.getParameter("cantidadproducto" + j));
 				  //detallePedido.grabar();
 				  if (rollback == false){
@@ -73,10 +73,10 @@ public class GrabaSolicitudPedido extends HttpServlet
 			
 			//DespachoPedido despachoPedido = new DespachoPedido();
 			despachoPedido.setNumeroPedido(numeropedido);
-			despachoPedido.setNombreCliente("Pastelería La Palmera");
-			despachoPedido.setDireccionDespacho("Venta");
-			despachoPedido.setFechaEntregaDespacho(httpservletrequest.getParameter("fechaentrega"));
-			despachoPedido.setHoraEntregaDespacho(httpservletrequest.getParameter("horaentrega"));
+			despachoPedido.setNombreCliente(httpservletrequest.getParameter("nombreDespacho") + " " + httpservletrequest.getParameter("apellido"));
+			despachoPedido.setDireccionDespacho(httpservletrequest.getParameter("direccionDespacho"));
+			despachoPedido.setFechaEntregaDespacho(httpservletrequest.getParameter("fechaDespacho"));
+			despachoPedido.setHoraEntregaDespacho(httpservletrequest.getParameter("horaDespacho"));
 			//despachoPedido.grabar();
 		    if (rollback == false){
 		       query = despachoPedido.grabar();
@@ -87,10 +87,10 @@ public class GrabaSolicitudPedido extends HttpServlet
 			    
 			//ConfirmacionPedido confirmacionPedido = new ConfirmacionPedido();
 			confirmacionPedido.setNumeroPedido(numeropedido);
-			confirmacionPedido.setNombreCliente("Pastelera La Palmera");
-			confirmacionPedido.setApellidoCliente("Pastelera La Palmera");
-			confirmacionPedido.setDireccionCliente("Ventas");
-			confirmacionPedido.setTelefonoCliente("268898");
+			confirmacionPedido.setNombreCliente(httpservletrequest.getParameter("nombreConfirmacion"));
+			confirmacionPedido.setApellidoCliente(httpservletrequest.getParameter("apellidoConfirmacion"));
+			confirmacionPedido.setDireccionCliente(httpservletrequest.getParameter("direccionConfirmacion"));
+			confirmacionPedido.setTelefonoCliente(httpservletrequest.getParameter("telefonoConfirmacion"));
 			//confirmacionPedido.grabar();
 	        if (rollback == false){
 	           query = confirmacionPedido.grabar();
